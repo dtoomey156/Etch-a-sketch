@@ -3,3 +3,11 @@
     height: 500px;
     display: grid;
 }
+
+.change-color {
+    background-color: blue;
+}
+
+.change-color:active {
+    background-color: antiquewhite;
+}
