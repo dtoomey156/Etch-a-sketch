@@ -1,11 +1,32 @@
 let sizeInput = "";
 const setSizeButton = document.querySelector("#size-button");
+let colorButtons = document.querySelectorAll("button");
+// let buttonId = "";
 
 setSizeButton.addEventListener("click", () => {
     sizeInput = document.querySelector("#size-input").value;
     console.log(sizeInput);
     populateBoard(sizeInput);
 })
+
+// DON'T USE BELOW, FOR LEARNING REFERENCE ONLY
+// event listener that is attached to all the color buttons, and will call the changeColor function to set the CSS color 
+// colorButtons.addEventListener("click", (ev) => {
+//     let buttonId = ev.target.id;
+//     // e.target.getAttribute('id');
+//     console.log(buttonId);
+// })
+
+// Attaches an event listener to each button on the page by calling a function for each element in the array. Previously wouldn't work because I was trying to attach an event listener to the variable colorButtons, which in turn assigned all buttons to it (reference above)
+colorButtons.forEach(b => b.addEventListener("click", changeColor));
+
+
+function changeColor(ev) {
+    // captures the event.target.id from the event listener
+    let buttonId = ev.target.id;
+    console.log(buttonId);
+    // need to figure out how to set the color in CSS based on the value of buttonId
+}
 
 function populateBoard(Input) {
     let board = document.querySelector(".board");
@@ -23,6 +44,8 @@ function populateBoard(Input) {
         board.insertAdjacentElement("beforeend", square);
     }
 }
+
+
 
 
 // function populateBoard(size) {
