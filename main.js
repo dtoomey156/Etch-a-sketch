@@ -2,6 +2,7 @@ let sizeInput = "";
 const setSizeButton = document.querySelector("#size-button");
 let colorButtons = document.querySelectorAll("button");
 // let buttonId = "";
+let color = "black";
 
 setSizeButton.addEventListener("click", () => {
     sizeInput = document.querySelector("#size-input").value;
@@ -21,20 +22,6 @@ setSizeButton.addEventListener("click", () => {
 colorButtons.forEach(b => b.addEventListener("click", changeColor));
 
 
-function changeColor(ev) {
-    // captures the event.target.id from the event listener
-    let buttonId = ev.target.id;
-    console.log(buttonId);
-    // need to figure out how to set the color in CSS based on the value of buttonId
-    if (buttonId === black) {
-        square.classlist.replace("black");
-    }
-}
-
-function paintGrid (elem, color) {
-
-}
-
 function populateBoard(input) {
     let board = document.querySelector(".board");
     let populatedBoard = board.querySelectorAll("div");
@@ -47,9 +34,7 @@ function populateBoard(input) {
     
         for (let i = 0; i < input * input; i++) {
             let square = document.createElement("div");
-            square.addEventListener("mouseover", () => {
-            square.style.backgroundColor = "black";
-            })
+            square.addEventListener("mouseover", colorSquare);
             square.style.border = "1px solid black";
             // square.classList.add("change-color");
             board.insertAdjacentElement("beforeend", square);
@@ -59,35 +44,20 @@ function populateBoard(input) {
     }
 }
 
-// Need to put in a function to limit the min and max size of the board or throw error message
+function colorSquare() {
+    this.style.backgroundColor = color;
+}
 
-// function minMaxSize(input) {
-//     if (input >= 2 && input <= 100) {
-//         populateBoard(input);
-//     } else {
-//         alert("Size needs to be between 2 and 100")
-//     }
-// }
+function changeColor(ev) {
+    // captures the event.target.id from the event listener
+    let buttonId = ev.target.id;
+    console.log(buttonId);
+    // need to figure out how to set the color in CSS based on the value of buttonId
+    if (buttonId === black) {
+        square.classlist.replace("black");
+    }
+}
 
 
-// function populateBoard(size) {
-//     let board = document.querySelector(".board");
-//     board.style.gridTemplateColumns = `repeat(${sizeInput}, 1fr)`;
-//     board.style.gridTemplateRows = `repeat(${sizeInput}, 1fr)`;
-    
-//     for (let i = 0; i<256; i++) {
-//         let square = document.createElement("div");
-//         square.style.backgroundColor = "blue";
-//         // square.style.border = "1px solid black";
-//         board.insertAdjacentElement("beforeend", square);
-//     }
-// }
 
-// populateBoard(sizeInput);
-
-// function changeSize(input) {
-//     setSizeButton.addEventListener("click", function() {
-//         populateBoard(sizeInput);
-//     })
-// }
 
