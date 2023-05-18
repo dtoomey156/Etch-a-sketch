@@ -26,6 +26,13 @@ function changeColor(ev) {
     let buttonId = ev.target.id;
     console.log(buttonId);
     // need to figure out how to set the color in CSS based on the value of buttonId
+    if (buttonId === black) {
+        square.classlist.replace("black");
+    }
+}
+
+function paintGrid (elem, color) {
+
 }
 
 function populateBoard(Input) {
@@ -38,14 +45,16 @@ function populateBoard(Input) {
     
     for (let i = 0; i < Input * Input; i++) {
         let square = document.createElement("div");
-        // square.style.backgroundColor = "blue";
+        square.addEventListener("mouseover", () => {
+            square.style.backgroundColor = "black";
+        })
         square.style.border = "1px solid black";
         square.classList.add("change-color");
         board.insertAdjacentElement("beforeend", square);
     }
 }
 
-
+// Need to put in a function to limit the min and max size of the board or throw error message
 
 
 // function populateBoard(size) {
