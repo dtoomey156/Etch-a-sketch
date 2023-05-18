@@ -35,26 +35,39 @@ function paintGrid (elem, color) {
 
 }
 
-function populateBoard(Input) {
+function populateBoard(input) {
     let board = document.querySelector(".board");
     let populatedBoard = board.querySelectorAll("div");
     populatedBoard.forEach((div) => div.remove());
     
-    board.style.gridTemplateColumns = `repeat(${Input}, 1fr)`;
-    board.style.gridTemplateRows = `repeat(${Input}, 1fr)`;
+    if (input >= 2 && input <= 100) {
     
-    for (let i = 0; i < Input * Input; i++) {
-        let square = document.createElement("div");
-        square.addEventListener("mouseover", () => {
+        board.style.gridTemplateColumns = `repeat(${input}, 1fr)`;
+        board.style.gridTemplateRows = `repeat(${input}, 1fr)`;
+    
+        for (let i = 0; i < input * input; i++) {
+            let square = document.createElement("div");
+            square.addEventListener("mouseover", () => {
             square.style.backgroundColor = "black";
-        })
-        square.style.border = "1px solid black";
-        square.classList.add("change-color");
-        board.insertAdjacentElement("beforeend", square);
+            })
+            square.style.border = "1px solid black";
+            // square.classList.add("change-color");
+            board.insertAdjacentElement("beforeend", square);
+        }
+    } else {
+        alert("Size needs to be between 2 and 100");
     }
 }
 
 // Need to put in a function to limit the min and max size of the board or throw error message
+
+// function minMaxSize(input) {
+//     if (input >= 2 && input <= 100) {
+//         populateBoard(input);
+//     } else {
+//         alert("Size needs to be between 2 and 100")
+//     }
+// }
 
 
 // function populateBoard(size) {
