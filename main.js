@@ -46,7 +46,11 @@ function populateBoard(input) {
 
 // function that will set each dynamically created div background color using a global variable for color
 function colorSquare() {
-    this.style.backgroundColor = color;
+    if (color == "random") {
+        this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else {
+        this.style.backgroundColor = color;
+    }
 }
 
 // function that will mutate the global variable [color] to whatever the user selects
@@ -59,8 +63,11 @@ function changeColor(ev) {
         color = "black";
     } else if (buttonId == "white") {
         color = "white";
+    } else if (buttonId == "random") {
+        color = "random";
     }
 }
+
 
 
 
