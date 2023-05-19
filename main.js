@@ -7,12 +7,18 @@ let clearButton = document.querySelector("#clear");
 let color = "black";
 let mouseDown = false;
 
+document.body.onmousedown = function() {
+    mouseDown = true;
+}
+
+document.body.onmouseup = function() {
+    mouseDown = false;
+}
+
 // Event listener to fire the default grid size function on Dom content load
 document.addEventListener("DOMContentLoaded", defaultSize);
 
-function defaultSize() {
-    populateBoard(16);
-}
+
 
 setSizeButton.addEventListener("click", () => {
     sizeInput = document.querySelector("#size-input").value;
@@ -20,7 +26,9 @@ setSizeButton.addEventListener("click", () => {
     populateBoard(sizeInput);
 })
 
-
+function defaultSize() {
+    populateBoard(16);
+}
 
 // DON'T USE BELOW, FOR LEARNING REFERENCE ONLY
 // event listener that is attached to all the color buttons, and will call the changeColor function to set the CSS color 
@@ -46,9 +54,9 @@ function populateBoard(input) {
     
         for (let i = 0; i < input * input; i++) {
             let square = document.createElement("div");
-            square.addEventListener("mouseover", colorSquare);
+            square.addEventListener("mouseenter", colorSquare);
             square.style.border = "1px solid black";
-            // square.classList.add("change-color");
+            square.classList.add("grid");
             board.insertAdjacentElement("beforeend", square);
         }
     } else {
@@ -58,24 +66,12 @@ function populateBoard(input) {
 
 // function that will set each dynamically created div background color using a global variable for color
 function colorSquare() {
-    if (color == "random") {
+    if (mouseDown && color == "random") {
         this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-    } else {
+    } else if (mouseDown) {
         this.style.backgroundColor = color;
     }
 }
-
-
-// clear the board and reset to default size
-clearButton.addEventListener("click", clearBoard);
-
-function clearBoard() {
-    let board = document.querySelector(".board");
-    // board.innerHTML = "";
-    populateBoard(16);
-}
-
-// function that will mutate the global variable [color] to whatever the user selects
 
 colorButtons.forEach(b => b.addEventListener("click", changeColor));
 
@@ -92,6 +88,20 @@ function changeColor(poop) {
         color = "random";
     }
 }
+
+
+// clear the board and reset to default size
+clearButton.addEventListener("click", clearBoard);
+
+function clearBoard() {
+    let board = document.querySelector(".board");
+    // board.innerHTML = "";
+    populateBoard(16);
+}
+
+// function that will mutate the global variable [color] to whatever the user selects
+
+
 
 
 
