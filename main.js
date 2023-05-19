@@ -44,17 +44,21 @@ function populateBoard(input) {
     }
 }
 
+// function that will set each dynamically created div background color using a global variable for color
 function colorSquare() {
     this.style.backgroundColor = color;
 }
 
+// function that will mutate the global variable [color] to whatever the user selects
 function changeColor(ev) {
     // captures the event.target.id from the event listener
     let buttonId = ev.target.id;
     console.log(buttonId);
-    // need to figure out how to set the color in CSS based on the value of buttonId
-    if (buttonId === black) {
-        square.classlist.replace("black");
+    
+    if (buttonId == "black") {
+        color = "black";
+    } else if (buttonId == "white") {
+        color = "white";
     }
 }
 
