@@ -1,11 +1,14 @@
+// Global variables
+
 let sizeInput = "";
 const setSizeButton = document.querySelector("#size-button");
 let colorButtons = document.querySelectorAll("button");
-// let buttonId = "";
+let clearButton = document.querySelector("#clear");
 let color = "black";
+let mouseDown = false;
 
 // Event listener to fire the default grid size function on Dom content load
-document.addEventListener("DOMContentLoaded", defaultSize());
+document.addEventListener("DOMContentLoaded", defaultSize);
 
 function defaultSize() {
     populateBoard(16);
@@ -17,6 +20,8 @@ setSizeButton.addEventListener("click", () => {
     populateBoard(sizeInput);
 })
 
+
+
 // DON'T USE BELOW, FOR LEARNING REFERENCE ONLY
 // event listener that is attached to all the color buttons, and will call the changeColor function to set the CSS color 
 // colorButtons.addEventListener("click", (ev) => {
@@ -26,7 +31,7 @@ setSizeButton.addEventListener("click", () => {
 // })
 
 // Attaches an event listener to each button on the page by calling a function for each element in the array. Previously wouldn't work because I was trying to attach an event listener to the variable colorButtons, which in turn assigned all buttons to it (reference above)
-colorButtons.forEach(b => b.addEventListener("click", changeColor));
+
 
 
 function populateBoard(input) {
@@ -60,10 +65,23 @@ function colorSquare() {
     }
 }
 
+
+// clear the board and reset to default size
+clearButton.addEventListener("click", clearBoard);
+
+function clearBoard() {
+    let board = document.querySelector(".board");
+    // board.innerHTML = "";
+    populateBoard(16);
+}
+
 // function that will mutate the global variable [color] to whatever the user selects
-function changeColor(ev) {
-    // captures the event.target.id from the event listener
-    let buttonId = ev.target.id;
+
+colorButtons.forEach(b => b.addEventListener("click", changeColor));
+
+function changeColor(poop) {
+    // event properties are implicitly captured from the event listener and passed to the function
+    let buttonId = poop.target.id;
     console.log(buttonId);
     
     if (buttonId == "black") {
