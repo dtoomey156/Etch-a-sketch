@@ -4,6 +4,13 @@ let colorButtons = document.querySelectorAll("button");
 // let buttonId = "";
 let color = "black";
 
+// Event listener to fire the default grid size function on Dom content load
+document.addEventListener("DOMContentLoaded", defaultSize());
+
+function defaultSize() {
+    populateBoard(16);
+}
+
 setSizeButton.addEventListener("click", () => {
     sizeInput = document.querySelector("#size-input").value;
     console.log(sizeInput);
